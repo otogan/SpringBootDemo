@@ -1,3 +1,3 @@
 # SpringBootDemo
 
-Master Branch
+Simple Demo Branch
