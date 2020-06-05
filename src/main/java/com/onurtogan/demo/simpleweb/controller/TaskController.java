@@ -1,9 +1,7 @@
 package com.onurtogan.demo.simpleweb.controller;
 
 import com.onurtogan.demo.simpleweb.Task;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,5 +18,10 @@ public class TaskController {
     public void addTask(@RequestBody Task task) {
         tasks.add(task);
         System.out.println(task);
+    }
+
+    @GetMapping(path = "/tasks/{id}")
+    public Task getTask(@PathVariable int id) {
+        return tasks.get(id - 1);
     }
 }
