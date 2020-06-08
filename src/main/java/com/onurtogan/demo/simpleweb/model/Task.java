@@ -1,4 +1,4 @@
-package com.onurtogan.demo.simpleweb;
+package com.onurtogan.demo.simpleweb.model;
 
 public class Task {
     private int id;

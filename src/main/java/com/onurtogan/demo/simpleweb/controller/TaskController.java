@@ -1,6 +1,6 @@
 package com.onurtogan.demo.simpleweb.controller;
 
-import com.onurtogan.demo.simpleweb.Task;
+import com.onurtogan.demo.simpleweb.model.Task;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
