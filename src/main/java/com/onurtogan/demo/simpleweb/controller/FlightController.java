@@ -1,6 +1,8 @@
 package com.onurtogan.demo.simpleweb.controller;
 
 import com.onurtogan.demo.simpleweb.model.FlightInfo;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +24,27 @@ public class FlightController {
     }
 
     @GetMapping("flights/{id}")
-    public FlightInfo getFlightInfo (@PathVariable int id) {
+    public FlightInfo getFlightInfo(@PathVariable int id) {
+        if (id > flightInfoList.size()) {
+            throw new FlightNotFoundException("Flight not found for id =" + id);
+        }
         return flightInfoList.get(id);
     }
 
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     @ExceptionHandler(IndexOutOfBoundsException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = NOT_FOUND_MESSAGE)
-    public HashMap<String, String> handleIndexOutOfBoundsException(Exception e) {
+    public HashMap<String, String> handleNotFoundFlight(Exception e) {
         HashMap<String, String> response = new HashMap<>();
         response.put("message", NOT_FOUND_MESSAGE);
         response.put("error", e.getClass().getSimpleName());
         return response;
+    }
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    static class FlightNotFoundException extends RuntimeException {
+        public FlightNotFoundException(String s) {
+            super(s);
+        }
     }
 }
