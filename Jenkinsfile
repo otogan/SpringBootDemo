@@ -1,14 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Deploy') {
+        stage('Build') {
             steps {
-                timeout(time: 1, unit: 'MINUTES') {
-                    sh 'for n in `seq 1 10`; do echo $n; sleep 1; done'
-                }
-                timeout(time: 1, unit: 'MINUTES') {
-                    sh 'for n in `seq 1 50`; do echo $n; sleep 1; done'
-                }
+                sh 'echo "Hello World"'
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
             }
         }
     }
